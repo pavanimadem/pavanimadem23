@@ -1,1 +1,11 @@
     
+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
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+yum install epel-release # repository that provides 'daemonize'
+  yum install java-11-openjdk-devel
+  yum install jenkins
+  
