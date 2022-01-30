@@ -9,3 +9,5 @@ yum install epel-release # repository that provides 'daemonize'
   yum install java-11-openjdk-devel
   yum install jenkins
   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
+  
+  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
