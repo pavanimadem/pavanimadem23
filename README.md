@@ -1,2 +1,3 @@
-# PavanJavaCode
- DevOps
+# maven-project
+
+Simple Maven Project
