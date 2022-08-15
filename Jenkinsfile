@@ -19,7 +19,7 @@ pipeline {
 }
 	stage('Compile') {
 	     steps {
-	         sh "mvn clean install"
+	         sh "mvn clean package"
 	     }
 	}
 	stage('Test') {
@@ -31,7 +31,7 @@ pipeline {
         sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
         // To run Maven on a Windows agent, use
-        // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+        // bat "mvn -Dmaven.test.failure.ignore=true clean install package"
       }
 
       post {
@@ -82,7 +82,7 @@ pipeline {
                   makeEmptyDirs: false,
                   noDefaultExcludes: false,
                   patternSeparator: '[, ]+',
-                  remoteDirectory: '/home/ansadmin', remoteDirectorySDF: false,
+                  remoteDirectory: '//home//ansadmin', remoteDirectorySDF: false,
                   removePrefix: 'webapp/target',
                   sourceFiles: 'webapp/target/*.war'
                 )
