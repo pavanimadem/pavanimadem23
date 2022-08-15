@@ -82,7 +82,7 @@ pipeline {
                   makeEmptyDirs: false,
                   noDefaultExcludes: false,
                   patternSeparator: '[, ]+',
-                  remoteDirectory: '//home//ansadmin', remoteDirectorySDF: false,
+                  remoteDirectory: '/home/ansadmin', remoteDirectorySDF: false,
                   removePrefix: 'webapp/target',
                   sourceFiles: 'webapp/target/*.war'
                 )
