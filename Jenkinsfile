@@ -52,7 +52,7 @@ pipeline {
 				]
 			], 
 	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 'S3 Bucket',
+	profileName: 'S3Profile',
 	userMetadata: []
 
       }
