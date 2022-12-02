@@ -45,7 +45,7 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 'myartifactorybuket', 
+					bucket: 'testbucketpav', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
@@ -67,17 +67,7 @@ pipeline {
       }
     }
 	
-	stage('Copy to Ansible'){
-   steps {
-sshPublisher(publishers: [sshPublisherDesc(configName: 'Ansible', transfers: [sshTransfer(cleanRemote: false, excludes: '',  execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target/', sourceFiles: '**/webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
-}
-}
-
-stage('Deploy to Tomcat'){
-   steps {
-sshPublisher(publishers: [sshPublisherDesc(configName: 'Ansible', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook -i /home/ansadmin/hosts /home/ansadmin/copy-playbook.yml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target/', sourceFiles: '**/webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
-}
-}
+	
   
 
   }
