@@ -43,7 +43,7 @@ pipeline {
 					keepForever: false,
 					managedArtifacts: false,
 					noUploadOnFailure: false,
-					selectedRegion: 'ap-southeast-1',
+					selectedRegion: 'us-east-1',
 					showDirectlyInBrowser: false,
 					sourceFile: '**/webapp/target/*.war',
 					storageClass: 'STANDARD',
