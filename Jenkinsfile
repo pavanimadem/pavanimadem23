@@ -37,7 +37,7 @@ pipeline {
 	entries: [
 				[
 					bucket: 'testbucketpav', 
-					excludedFile: '/webapp/target',
+					excludedFile: '/webapp/target/',
 					flatten: false,
 					gzipFiles: false,
 					keepForever: false,
