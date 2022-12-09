@@ -10,13 +10,26 @@ pipeline {
     
 	
 	
-	stage('Clone') {
-      steps {
+	//stage('Clone') {
+    //  steps {
         // Get some code from a GitHub repository
-         git branch: "main", url: "https://github.com/PavanDeepakPagadala/PavanDevOpsProject.git"
+  //       git branch: "main", url: "https://github.com/PavanDeepakPagadala/PavanDevOpsProject.git"
 		
-}
-}
+//}
+//}
+
+  stage('Checkout SCM') {
+            steps {
+                checkout([
+                 $class: 'GitSCM',
+                 branches: [[name: 'main']],
+                 userRemoteConfigs: [[
+                    url:  "https://github.com/PavanDeepakPagadala/PavanDevOpsProject.git",
+                    credentialsId: '',
+                 ]]
+                ])
+            }
+        }
 	stage('Compile') {
 	     steps {
 	         sh "mvn clean  package"
