@@ -6,3 +6,4 @@ Added By Deepak
 Added from GITHUB
 Added from GITBASH
 test git reset
+Test from GIT BASH
