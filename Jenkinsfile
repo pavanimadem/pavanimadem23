@@ -19,7 +19,7 @@ pipeline {
 }
 	stage('Compile') {
 	     steps {
-	         sh "mvn clean package"
+	         sh "mvn clean  package"
 	     }
 	}
 	stage('Test') {
@@ -37,7 +37,7 @@ pipeline {
 	entries: [
 				[
 					bucket: 'testbucketpav', 
-					excludedFile: '/webapp/target/',
+					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
 					keepForever: false,
