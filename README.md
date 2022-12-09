@@ -3,4 +3,5 @@
 Simple Maven Project
 From Pavan
 Added By Deepak
-Addedd from GITHUB
+Added from GITHUB
+Added from GITBASH
