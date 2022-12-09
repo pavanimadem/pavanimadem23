@@ -7,3 +7,4 @@ Added from GITHUB
 Added from GITBASH
 test git reset
 Test from GIT BASH
+Test from Central Repository
