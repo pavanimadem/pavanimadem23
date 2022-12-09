@@ -9,3 +9,4 @@ test git reset
 Test from GIT BASH
 Test from Central Repository
 Test from testing branch
+Test from testing central repository
