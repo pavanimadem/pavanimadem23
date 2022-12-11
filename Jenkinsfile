@@ -79,7 +79,7 @@ pipeline {
 	stage('Deploy to Tomcat from S3') {
 	    steps {
 			
-	        sh " aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
+	        sh " sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
 	    }
 	}
 	
