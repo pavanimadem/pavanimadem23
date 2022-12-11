@@ -73,7 +73,7 @@ pipeline {
     }
 	stage('Clean'){
 		steps{
-			sh "sudo rm  /opt/tomcat/webapps/webapp.war"
+			sh "sudo rm /opt/tomcat/webapps/webapp.war"
 		}
 	}
 	stage('Deploy to Tomcat from S3') {
