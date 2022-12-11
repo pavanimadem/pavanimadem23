@@ -43,34 +43,7 @@ pipeline {
 	    }
 	}
 	
-	 stage('S3 Upload') {
-      steps {
-        s3Upload consoleLogLevel: 'INFO',
-	dontSetBuildResultOnFailure: false,
-	dontWaitForConcurrentBuildCompletion: false,
-	entries: [
-				[
-					bucket: 'testbucketpav', 
-					excludedFile: '/webapp/target',
-					flatten: false,
-					gzipFiles: false,
-					keepForever: false,
-					managedArtifacts: false,
-					noUploadOnFailure: false,
-					selectedRegion: 'us-east-1',
-					showDirectlyInBrowser: false,
-					sourceFile: '**/webapp/target/*.war',
-					storageClass: 'STANDARD',
-					uploadFromSlave: false,
-					useServerSideEncryption: false
-				]
-			], 
-	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 'S3Profile',
-	userMetadata: []
-
-      }
-    }
+	
 	
 	
   
