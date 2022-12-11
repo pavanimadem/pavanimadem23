@@ -75,6 +75,7 @@ pipeline {
 	stage('S3 Download') {
 	    steps {
 	        sh "aws s3 cp s3://testbucketpav/webapp/target/webapp.war ."
+			sh " mv /var/lib/jenkins/workspace/Java_Pipeline_Application/webapp.war /root/archive/"
 
 	    }
 	}
