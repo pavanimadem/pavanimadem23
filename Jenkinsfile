@@ -74,8 +74,7 @@ pipeline {
 
 	stage('S3 Download') {
 	    steps {
-			sh "sudo  mkdir /root/archive1"
-	        sh "aws s3 cp s3://testbucketpav/webapp/target/webapp.war /root/archive1/"
+	        sh "aws s3 cp s3://testbucketpav/webapp/target/webapp.war ."
 
 	    }
 	}
