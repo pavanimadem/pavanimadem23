@@ -76,6 +76,9 @@ pipeline {
 	    }
 	}
 	
+	stage('Email'){
+		emailext body: 'Please check the console output', subject: 'Jenkins Build Status', to: 'pavandeepakpagadala@gmail.com'
+	}
 	
   
 
