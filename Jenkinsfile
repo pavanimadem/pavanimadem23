@@ -76,10 +76,10 @@ pipeline {
 			sh "sudo rm  /opt/tomcat/webapps/webapp.war"
 		}
 	}
-	stage('S3 Download') {
+	stage('Deploy to Tomcat from S3') {
 	    steps {
 			
-	        sh " sudo chmod -R 777 /root/jenkinsscripts/tomcatscript.sh" 
+	        sh " aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
 	    }
 	}
 	
