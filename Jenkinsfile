@@ -78,7 +78,9 @@ pipeline {
 	
 	stage('Email'){
 		steps {
-		emailext body: 'Please check the console output', subject: 'Jenkins Build Status', to: 'pavandeepakpagadala@gmail.com'
+		emailext body: '$DEFAULT_CONTENT', 
+		 subject: 'Jenkins Build Status', 
+		 to: 'pavandeepakpagadala@gmail.com'
 		}
 	}
 	
