@@ -71,9 +71,14 @@ pipeline {
 
       }
     }
-
+	stage('Clean'){
+		steps{
+			sh "rm -rf /opt/tomcat/webapps/webapp.war"
+		}
+	}
 	stage('S3 Download') {
 	    steps {
+			
 	        sh " sudo chmod -R 777 /root/jenkinsscripts/tomcatscript.sh" 
 	    }
 	}
