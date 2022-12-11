@@ -73,7 +73,7 @@ pipeline {
     }
 	stage('Clean'){
 		steps{
-			sh "rm -rf /opt/tomcat/webapps/webapp.war"
+			sh "sudo chmod -R 777 rm -rf /opt/tomcat/webapps/webapp.war"
 		}
 	}
 	stage('S3 Download') {
