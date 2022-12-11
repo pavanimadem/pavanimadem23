@@ -74,7 +74,7 @@ pipeline {
 
 	stage('S3 Download') {
 	    steps {
-	        sh "./jenkinsscripts/tomcatscript.sh"
+	        sh "./jenkinsscripts/tomcatscript.sh" 
 	    }
 	}
 	
