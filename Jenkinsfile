@@ -71,6 +71,14 @@ pipeline {
 
       }
     }
+
+	stage('S3download') {
+      steps {
+    withAWS(credentials:'awscredentials') {
+        s3Download(file:'webapp.war' 'key', bucket: 'testbucketpav', path: 'https://testbucketpav.s3.amazonaws.com/webapp/target/webapp.war')
+      }
+    }
+    }
 	
 	
   
