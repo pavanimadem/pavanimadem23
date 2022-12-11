@@ -72,7 +72,12 @@ pipeline {
       }
     }
 
-	
+	stage('S3 Download') {
+	    steps {
+	        sh "aws s3 cp s3://testbucketpav/webapp/target/webapp.war /root/archive/"
+
+	    }
+	}
 	
 	
   
