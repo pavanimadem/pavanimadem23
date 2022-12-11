@@ -8,16 +8,6 @@ pipeline {
 
   stages {
     
-	
-	
-	//stage('Clone') {
-    //  steps {
-        // Get some code from a GitHub repository
-  //       git branch: "main", url: "https://github.com/PavanDeepakPagadala/PavanDevOpsProject.git"
-		
-//}
-//}
-
 //For webhook
   stage('Checkout SCM') {
             steps {
@@ -71,15 +61,17 @@ pipeline {
 
       }
     }
+	//To remove old war files
 	stage('Clean'){
 		steps{
 			sh "sudo rm -f /opt/tomcat/webapps/webapp.war"
 		}
 	}
+	//TO download war files from s3 bucket to tomcat 
 	stage('Deploy to Tomcat from S3') {
 	    steps {
 			
-			
+
 	        sh " sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
 	    }
 	}
