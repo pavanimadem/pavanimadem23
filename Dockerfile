@@ -1,6 +1,12 @@
-# Pull base image 
-from ubuntu:22.04
-# Maintainer 
-LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-RUN apt-get update
-RUN cp -R /var/lib/jenkins/workspace/Java_Pipeline_Application/webapp/target/*.war /home/ubuntu/
+FROM node:14
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+CMD [ "node", "index.js" ]
