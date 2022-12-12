@@ -2,5 +2,4 @@
 from amazonlinux
 # Maintainer 
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-RUN yum install update -y
-RUN cp -R *.war /root/
+RUN cp -R /var/lib/jenkins/workspace/Java_Pipeline_Application/webapp/target/*.war /root/
