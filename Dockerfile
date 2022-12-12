@@ -2,4 +2,4 @@
 from amazonlinux
 # Maintainer 
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-RUN ls
+RUN ls -ll
