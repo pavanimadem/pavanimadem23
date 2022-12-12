@@ -2,4 +2,4 @@
 from tomcat:latest
 # Maintainer 
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-COPY /var/lib/jenkins/workspace/Java_Pipeline_Application/*.war /usr/local/tomcat/webapps/
+COPY ./*.war /usr/local/tomcat/webapps/
