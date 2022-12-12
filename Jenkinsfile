@@ -93,10 +93,10 @@ pipeline {
 	stage('Publish to ECR') {
 		steps {
 			script {
-				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}  | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-				dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-				sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URL}:$IMAGE_TAG"
-				sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URL}:$IMAGE_TAG"
+				sh " sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 962826464166.dkr.ecr.us-east-1.amazonaws.com"
+				 sh "docker build -t webapp ."
+				sh "docker tag webapp:latest 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
+				sh "docker push 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
 			}
 		}
 	}
