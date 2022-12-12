@@ -1,7 +1,6 @@
 # Pull base image 
-From tomcat:8-jre8 
-
+from ubuntu:22.04
 # Maintainer 
-MAINTAINER "sai4cs@gmail.com" 
-COPY ./webapp.war /usr/local/tomcat/webapps
-RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
+RUN apt-get update
+RUN cp -R /var/lib/jenkins/workspace/Java_Pipeline_Application/webapp/target/*.war /home/ubuntu/webapp.war
