@@ -93,6 +93,7 @@ pipeline {
 	stage('Publish to ECR') {
 		steps {
 			script {
+				sh "pwd"
 				sh " sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 962826464166.dkr.ecr.us-east-1.amazonaws.com"
 				 sh "docker build -t webapp ."
 				sh "docker tag webapp:latest 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
