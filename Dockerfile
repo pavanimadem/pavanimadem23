@@ -1,6 +1,6 @@
 # Pull base image 
-from ubuntu:22.04
+from amazonlinux
 # Maintainer 
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-RUN apt-get update
-RUN cp -R *.war /home/ubuntu/
+RUN yum install update -y
+RUN cp -R *.war /root/
