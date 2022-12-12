@@ -4,4 +4,4 @@ from tomcat:latest
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
 COPY ./*.war /usr/local/tomcat/webapps/
 EXPOSE 8080
-CMD [“catalina.sh”, “run”]
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
