@@ -39,16 +39,16 @@ pipeline {
 
 	    }
 	}
-	stage('SonarQube analysis') {
+	//stage('SonarQube analysis') {
     //def scannerHome = tool 'SonarScanner 4.7';
-        steps{
-        withSonarQubeEnv('sonarqube') { 
+      //  steps{
+       // withSonarQubeEnv('sonarqube') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn sonar:sonar"
-    }
-        }
-        }
+        //sh "mvn sonar:sonar"
+   // }
+      //  }
+       // }
 	
 	 stage('S3 Upload') {
       steps {
