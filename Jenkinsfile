@@ -93,6 +93,7 @@ pipeline {
 	stage('Publish to ECR') {
 		steps {
 			script {
+				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Java_Pipeline_Application/"
 				sh "pwd"
 				sh " sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 962826464166.dkr.ecr.us-east-1.amazonaws.com"
 				 sh "docker build -t webapp ."
