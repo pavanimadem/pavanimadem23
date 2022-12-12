@@ -5,6 +5,13 @@ pipeline {
     // Install the Maven version configured as "M2_HOME" and add it to the path.
     maven "M2_HOME"
   }
+  environment{
+	AWS_ACCOUNT_ID = "962826464166" 
+	AWS_DEFAULT_REGION = "us-east-1"
+	IMAGE_REPO_NAME = "webapp"
+	IMAGE_TAG = "latest"
+	REPOSIT_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazon.aws.com/${IMAGE_REPO_NAME}"
+  }
 
   stages {
     
@@ -81,6 +88,16 @@ pipeline {
 		emailext body: '$DEFAULT_CONTENT', 
 		 subject: 'Jenkins Build Status', 
 		 to: 'pavandeepakpagadala@gmail.com'
+		}
+	}
+	stage('Publish to ECR') {
+		steps {
+			script {
+				sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}  | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+				dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+				sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+				sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+			}
 		}
 	}
 	
