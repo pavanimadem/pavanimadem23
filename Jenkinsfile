@@ -38,17 +38,7 @@ pipeline {
 
 	    }
 	}
-	//stage('SonarQube analysis') {
-    //def scannerHome = tool 'SonarScanner 4.7';
-      //  steps{
-       // withSonarQubeEnv('sonarqube') { 
-        // If you have configured more than one global server connection, you can specify its name
-//      sh "${scannerHome}/bin/sonar-scanner"
-        //sh "mvn sonar:sonar"
-   // }
-      //  }
-       // }
-	//TO upload war file into S3 bucket using IAM role and S3Profile configuration in jenkins.
+	
 	 stage('Upload To S3 Bucket ') {
       steps {
         s3Upload consoleLogLevel: 'INFO',
@@ -91,31 +81,15 @@ pipeline {
 	        sh " sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
 	    }
 	}
-	//For Email notification on build status
-	stage('Email'){
-		steps {
+
+  }
+
+  post {
+	always {
 		emailext body: '$DEFAULT_CONTENT', //configure message in body in jenkins
 		 subject: 'Jenkins Build Status', 
 		 to: 'pavandeepakpagadala@gmail.com'
-		}
 	}
-	//TO build docker image and push to AWS ECR repository by taking war file from S3 bucket
-	//Use docker context use command inside job directory to build files using Dockerfile
-	stage('Publish to ECR') {
-		steps {
-			script {
-				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Java_Pipeline_Application/" //download war file from s3 to job do=irectory for build
-				sh "pwd" //to know current directory
-				sh "sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 962826464166.dkr.ecr.us-east-1.amazonaws.com"
-				 sh "sudo docker build -t webapp ." //to build war file from present directory with tag webapp
-				sh "sudo docker tag webapp:latest 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
-				sh "sudo docker push 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
-			}
-		}
-	}
-	
-  
-
   }
 
 }
