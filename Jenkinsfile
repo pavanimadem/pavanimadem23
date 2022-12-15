@@ -73,7 +73,7 @@ pipeline {
 	stage('Docker Image Upload') {
 		steps {
 			script {
-				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Docker Pipeline/" //download war file from s3 to job directory for build
+				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Docker/" //download war file from s3 to job directory for build
 				sh "pwd"
 				sh "sudo aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | sudo docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 				sh "sudo docker build -t ${IMAGE_REPO_NAME} ." 
