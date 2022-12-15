@@ -68,20 +68,6 @@ pipeline {
 
       }
     }
-	//To remove old war files
-	stage('Clean'){
-		steps{
-			sh "sudo rm -f /opt/tomcat/webapps/webapp.war" 
-		}
-	}
-	//To download war files from s3 bucket to tomcat 
-	stage('Deploy to Tomcat from S3') {
-	    steps {
-			
-
-	        sh " sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
-	    }
-	}
 	//TO build docker image and push to AWS ECR repository by taking war file from S3 bucket
 	//Use docker context use command inside job directory to build files using Dockerfile
 	stage('Docker Image Upload') {
