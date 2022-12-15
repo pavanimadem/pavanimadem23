@@ -2,6 +2,7 @@
 from tomcat:latest
 # Maintainer 
 LABEL MAINTAINER "pavandeepakpagadala@gmail.com"
-COPY ./*.war /usr/local/tomcat/webapps/
+# To copy war file from jenkins to  docker image tomcat server
+COPY ./*.war /usr/local/tomcat/webapps/ 
 EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
