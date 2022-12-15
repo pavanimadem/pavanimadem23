@@ -15,8 +15,7 @@ pipeline {
 
   stages {
     
-//For webhook
-  stage('Checkout SCM') {
+  stage('GIT Clone') {
             steps {
                 checkout([
                  $class: 'GitSCM',
@@ -49,8 +48,8 @@ pipeline {
    // }
       //  }
        // }
-	
-	 stage('S3 Upload') {
+	//TO upload war file into S3 bucket using IAM role and S3Profile configuration in jenkins.
+	 stage('Upload To S3 Bucket ') {
       steps {
         s3Upload consoleLogLevel: 'INFO',
 	dontSetBuildResultOnFailure: false,
@@ -73,7 +72,7 @@ pipeline {
 				]
 			], 
 	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 'S3Profile',
+	profileName: 'S3Profile', //Give same name as configured in jenkins
 	userMetadata: []
 
       }
@@ -81,10 +80,10 @@ pipeline {
 	//To remove old war files
 	stage('Clean'){
 		steps{
-			sh "sudo rm -f /opt/tomcat/webapps/webapp.war"
+			sh "sudo rm -f /opt/tomcat/webapps/webapp.war" 
 		}
 	}
-	//TO download war files from s3 bucket to tomcat 
+	//To download war files from s3 bucket to tomcat 
 	stage('Deploy to Tomcat from S3') {
 	    steps {
 			
@@ -92,21 +91,23 @@ pipeline {
 	        sh " sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /opt/tomcat/webapps/" 
 	    }
 	}
-	
+	//For Email notification on build status
 	stage('Email'){
 		steps {
-		emailext body: '$DEFAULT_CONTENT', 
+		emailext body: '$DEFAULT_CONTENT', //configure message in body in jenkins
 		 subject: 'Jenkins Build Status', 
 		 to: 'pavandeepakpagadala@gmail.com'
 		}
 	}
+	//TO build docker image and push to AWS ECR repository by taking war file from S3 bucket
+	//Use docker context use command inside job directory to build files using Dockerfile
 	stage('Publish to ECR') {
 		steps {
 			script {
-				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Java_Pipeline_Application/"
-				sh "pwd"
+				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Java_Pipeline_Application/" //download war file from s3 to job do=irectory for build
+				sh "pwd" //to know current directory
 				sh "sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 962826464166.dkr.ecr.us-east-1.amazonaws.com"
-				 sh "sudo docker build -t webapp ."
+				 sh "sudo docker build -t webapp ." //to build war file from present directory with tag webapp
 				sh "sudo docker tag webapp:latest 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
 				sh "sudo docker push 962826464166.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"
 			}
