@@ -54,7 +54,7 @@ pipeline {
 					keepForever: false,
 					managedArtifacts: false,
 					noUploadOnFailure: false,
-					selectedRegion: 'us-east-1',
+					selectedRegion: '${AWS_DEFAULT_REGION}',
 					showDirectlyInBrowser: false,
 					sourceFile: '**/webapp/target/*.war',
 					storageClass: 'STANDARD',
