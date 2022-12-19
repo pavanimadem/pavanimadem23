@@ -71,6 +71,7 @@ pipeline {
 	//TO build docker image and push to AWS ECR repository by taking war file from S3 bucket
 	//Use docker context use command inside job directory to build files using Dockerfile
 	stage('Docker Image Upload') {
+		
 		steps {
 			script {
 				sh "sudo aws s3 cp s3://testbucketpav/webapp/target/webapp.war /var/lib/jenkins/workspace/Docker/" //download war file from s3 to job directory for build
